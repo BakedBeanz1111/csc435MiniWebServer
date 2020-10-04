@@ -57,8 +57,8 @@ import java.net.*; // Get the Java networking libraries
 
 class ListenWorker extends Thread {    // Class definition
   Socket sock;                   // Class member, socket, local to
-  ListnWorker.
-  ListenWorker (Socket s) {sock = s;} // Constructor, assign arg s
+  //ListnWorker.
+  ListenWorker(Socket s) {sock = s;} // Constructor, assign arg s
                                       //to local sock
   public void run(){
     PrintStream out = null;   // Input from the socket
@@ -76,8 +76,7 @@ class ListenWorker extends Thread {    // Class definition
       out.println("Connection: close"); // Can fool with this.
       // int Len = HTMLResponse.length();
       // out.println("Content-Length: " + Integer.toString(Len));
-      out.println("Content-Length: 400"); // Lazy, so set high. Calculate
-			 later.
+      out.println("Content-Length: 400"); // Lazy, so set high. Calculate later.
       out.println("Content-Type: text/html \r\n\r\n");
       out.println(HTMLResponse);
 
@@ -105,8 +104,7 @@ public class WebResponse {
     ServerSocket servsock = new ServerSocket(port, q_len);
 
     System.out.println("Clark Elliott's WebResponse running at 2540.");
-    System.out.println("Point Firefox browser to
-    http://localhost:2540/abc.\n");
+    System.out.println("Point Firefox browser to http://localhost:2540/abc.\n");
     while (true) {
       // wait for the next client connection:
       sock = servsock.accept();
