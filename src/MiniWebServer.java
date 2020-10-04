@@ -1,3 +1,6 @@
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 class Worker extends Thread {
 
@@ -36,7 +39,7 @@ public class MiniWebServer {
 
         System.out.println("Amad's Mini Web Server is listening on port(" + primaryPort + ")...");
 
-        ServerSocket = new ServerSocket(primaryPort, qLength);
+        ServerSocket serverSocket = new ServerSocket(primaryPort, qLength);
 
         while(true) {
 

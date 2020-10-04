@@ -25,7 +25,7 @@ Hello Browser World N
 
 See WebAdd.html source HTML below.
 
-To complete the MiniWebserver.java assignment, modify this file (or start
+To complete the MiniWebServer.java assignment, modify this file (or start
 your own from
 scratch) so that your MiniWebserver returns HTML containing the person's
 name and the sum of
