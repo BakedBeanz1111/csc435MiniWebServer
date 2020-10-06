@@ -18,11 +18,14 @@ import java.net.Socket;
 
     Q2) Explained how you would return the contents of requested files (web pages) of type HTML (text/html)
 
-    A2)
+    A2) Parse the HTML request request to string? This is a very vague question. The contents of a web file are
+        contents of an HTML file full of tags and other stuff like that. To return an HTML file's contents, wouldn't
+        you just parse it to a string and then you can return it.
 
     Q3) Explained how you would return the contents of requested files (web pages) of type TEXT (text/plain)
 
-    A3)
+    A3) Parse a text file to binary? This is also a very vague question. The content of a text file can be any ASCII
+        characters. To return the contents of that file, you could parse it to a binary bitstream and send it somewhere.
  */
 
 
