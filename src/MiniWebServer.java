@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+//From the sample provided code, ListenWorker is Worker
 class Worker extends Thread {
 
     Socket sock;
@@ -21,11 +22,19 @@ class Worker extends Thread {
             in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             out = new PrintStream(sock.getOutputStream());
 
+            try {
+
+                System.out.println("Sending HTML response now...");
+            }
+
         } catch (IOException x) {
 
             System.out.println("ERROR:" + x.getMessage());
         }
     }
+
+
+
 }
 
 public class MiniWebServer {
