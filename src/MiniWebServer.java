@@ -60,8 +60,6 @@ class Worker extends Thread {
         }
     }
 
-
-
 }
 
 public class MiniWebServer {
