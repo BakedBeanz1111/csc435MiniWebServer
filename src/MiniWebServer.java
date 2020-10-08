@@ -69,10 +69,7 @@ class Worker extends Thread {
 						
 						String value = a.substring(a.indexOf("=")+1);
 						
-						//System.out.println(value);
-						
 						values[i] = value;
-						//System.out.println(i + " " + values[i]);
 						i++;
 						
 						if(i == 3)
@@ -90,8 +87,9 @@ class Worker extends Thread {
 					
 					System.out.println("You entered name: " + name);
 					System.out.println("The sum of " + num1 + " + " + num2 + " is: " + sum);
-			
 					
+					//String HTMLResponse = "<html> <h1> You Entered name: " + name + " Your sum is: " + sum +  "</h1> <p><p> <hr> <p>";
+					//out.println(HTMLResponse);
 				}
 				System.out.flush();
 			}

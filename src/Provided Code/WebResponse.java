@@ -25,7 +25,7 @@ Hello Browser World N
 
 See WebAdd.html source HTML below.
 
-To complete the MiniWebServer.java assignment, modify this file (or start
+To complete the MiniWebserver.java assignment, modify this file (or start
 your own from
 scratch) so that your MiniWebserver returns HTML containing the person's
 name and the sum of
@@ -39,8 +39,15 @@ window.)
 HTML Reference site:
 https://www.w3schools.com/
 
+You may find that including the following in your HTML header helps with
+facivon problems (Thanks Thomas K.!):
+
+<head> <link rel="icon" href="data:,"> </head>
+
+https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests
+
 For the MiniWebserver assignment answer these questions briefly in YOUR OWN
-WORDS:
+WORDS here in your comments:
 
 1. How MIME-types are used to tell the browser what data is coming.
 
@@ -50,16 +57,16 @@ WORDS:
 3. How you would return the contents of requested files of type TEXT
 (text/plain)
 
+
+
 */
 
 import java.io.*;  // Get the Input Output libraries
 import java.net.*; // Get the Java networking libraries
 
 class ListenWorker extends Thread {    // Class definition
-  Socket sock;                   // Class member, socket, local to
-  //ListnWorker.
-  ListenWorker(Socket s) {sock = s;} // Constructor, assign arg s
-                                      //to local sock
+  Socket sock;                   // Class member, socket, local to ListnWorker.
+  ListenWorker (Socket s) {sock = s;} // Constructor, assign arg s to local sock
   public void run(){
     PrintStream out = null;   // Input from the socket
     BufferedReader in = null; // Output to the socket
@@ -68,10 +75,8 @@ class ListenWorker extends Thread {    // Class definition
       in = new BufferedReader
         (new InputStreamReader(sock.getInputStream()));
 
-      System.out.println("Sending the HTML Reponse now: " +
-			 Integer.toString(WebResponse.i) + "\n" );
-           String HTMLResponse = "<html> <h1> Hello Browser World! " +
-	     Integer.toString(WebResponse.i++) +  "</h1> <p><p> <hr> <p>";
+      System.out.println("Sending the HTML Reponse now: " + Integer.toString(WebResponse.i) + "\n" );
+      String HTMLResponse = "<html> <h1> Hello Browser World! " + Integer.toString(WebResponse.i++) +  "</h1> <p><p> <hr> <p>";
       out.println("HTTP/1.1 200 OK");
       out.println("Connection: close"); // Can fool with this.
       // int Len = HTMLResponse.length();

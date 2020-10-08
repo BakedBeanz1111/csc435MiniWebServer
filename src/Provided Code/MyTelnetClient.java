@@ -71,7 +71,7 @@ public class MyTelnetClient{
     System.out.println("Using server: " + serverName + ", Port: 80");
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     try {
-      sock = new Socket(serverName, 2540); // change this to 2540 if you want to talk to MyListener at localhost!
+      sock = new Socket(serverName, 80); // change this to 2540 if you want to talk to MyListener at localhost!
       fromServer =
         new BufferedReader(new InputStreamReader(sock.getInputStream()));
       toServer = new PrintStream(sock.getOutputStream());
