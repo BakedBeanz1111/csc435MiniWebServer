@@ -29,15 +29,18 @@ import java.net.*;
 
 
 //From the sample provided code, ListenWorker is Worker
+//Our worker class extends the java thread class to expand functionality
 class Worker extends Thread {
 
     Socket sock;
 
+	//Default constructor for creating new worker object
     Worker(Socket s) {
 
         sock = s;
     }
 
+	//This function executes upon each new creation of worker
     public void run() {
 
         PrintStream out = null;
@@ -45,11 +48,15 @@ class Worker extends Thread {
 
         try {
 
+			//input from the socket connection
             in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			//Text output to send to client
             out = new PrintStream(sock.getOutputStream());
 			
+			//All of the data that comes through the socket connection
 			String socketData;
 			
+			//Declaring variables to be used for later
 			String name;
 			int num1;
 			int num2;
@@ -58,13 +65,20 @@ class Worker extends Thread {
 				
 				socketData = in.readLine();
 				
+				//If the line that contains "GET" exists on the in response, then do some parsing!
 				if(socketData.contains("GET")) {
 					
+					//The formatted data for the URL is like Name=Something&num1=Somethingelse&num2=someotherthing
+					
+					//All the URL parameters are split by the & symbol, so I just split that line into multiple strings to parse and manipulate the variables
 					String[] parameters = socketData.split("&");
-					String[] values = new String[3];
+					String[] values = new String[3]; //Since there are 3 "&" symbols in the URL, we have 3 parameters to parse out of the URL
 					
 					int i = 0;
 					
+					//The following code was inspired by what I found on StackOverflow
+					//https://stackoverflow.com/questions/19431710/splitting-an-array-of-strings-in-java-using-split
+					//I was googling advice on how to split and trim strings
 					for(String a : parameters) {
 						
 						String value = a.substring(a.indexOf("=")+1);
@@ -72,6 +86,11 @@ class Worker extends Thread {
 						values[i] = value;
 						i++;
 						
+						//i = 0 -> Name
+						//i = 1 -> num1
+						//i = 2 -> num2
+						
+						//If i becomes 3, reset back to 0
 						if(i == 3)
 							i = 0;
 													
@@ -80,6 +99,7 @@ class Worker extends Thread {
 					name = values[0];
 					num1 = Integer.parseInt(values[1]);
 					
+					//Had to trim the trailing value of num2 from the space onward
 					String[] garbage = values[2].split(" ");
 					num2 = Integer.parseInt(garbage[0]);
 					
@@ -88,6 +108,7 @@ class Worker extends Thread {
 					System.out.println("You entered name: " + name);
 					System.out.println("The sum of " + num1 + " + " + num2 + " is: " + sum);
 					
+					//I tried using what I found in WebResponse.java to try and figure out how I can modify the HTML to get a response on the screen but was unsuccessful
 					//String HTMLResponse = "<html> <h1> You Entered name: " + name + " Your sum is: " + sum +  "</h1> <p><p> <hr> <p>";
 					//out.println(HTMLResponse);
 				}
@@ -110,7 +131,7 @@ public class MiniWebServer {
         Socket sock;
 
         System.out.println("Amad's Mini Web Server is listening on port(" + primaryPort + ")...");
-        System.out.println("Point Firefox browser to http://localhost:2540/abc.\n");
+        System.out.println("Point Firefox browser to the WebAdd.html page!");
 
         ServerSocket serverSocket = new ServerSocket(primaryPort, qLength);
 
