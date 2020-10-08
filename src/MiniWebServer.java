@@ -1,6 +1,5 @@
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 
 /*
 
@@ -48,18 +47,59 @@ class Worker extends Thread {
 
             in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             out = new PrintStream(sock.getOutputStream());
-
-            try {
-
-                System.out.println("Sending HTML response now...");
-            }
-
+			
+			String socketData;
+			
+			String name;
+			int num1;
+			int num2;
+			
+			while(true) {
+				
+				socketData = in.readLine();
+				
+				if(socketData.contains("GET")) {
+					
+					String[] parameters = socketData.split("&");
+					String[] values = new String[3];
+					
+					int i = 0;
+					
+					for(String a : parameters) {
+						
+						String value = a.substring(a.indexOf("=")+1);
+						
+						//System.out.println(value);
+						
+						values[i] = value;
+						//System.out.println(i + " " + values[i]);
+						i++;
+						
+						if(i == 3)
+							i = 0;
+													
+					}
+					
+					name = values[0];
+					num1 = Integer.parseInt(values[1]);
+					
+					String[] garbage = values[2].split(" ");
+					num2 = Integer.parseInt(garbage[0]);
+					
+					int sum = num1 + num2;
+					
+					System.out.println("You entered name: " + name);
+					System.out.println("The sum of " + num1 + " + " + num2 + " is: " + sum);
+			
+					
+				}
+				System.out.flush();
+			}
         } catch (IOException x) {
 
             System.out.println("ERROR:" + x.getMessage());
         }
     }
-
 }
 
 public class MiniWebServer {
@@ -72,6 +112,7 @@ public class MiniWebServer {
         Socket sock;
 
         System.out.println("Amad's Mini Web Server is listening on port(" + primaryPort + ")...");
+        System.out.println("Point Firefox browser to http://localhost:2540/abc.\n");
 
         ServerSocket serverSocket = new ServerSocket(primaryPort, qLength);
 
